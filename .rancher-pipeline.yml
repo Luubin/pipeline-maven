@@ -3,8 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: maven:3-jdk-7
-      shellScript: |-
-        mvn clean install
+      shellScript: mvn clean install
 - name: Publish
   steps:
   - publishImageConfig:
@@ -15,3 +14,11 @@ stages:
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
+notification:
+  recipients:
+  - recipient: https://oapi.dingtalk.com/robot/send?access_token=55294e2c78c147bb1a845c1fae261d505ab9849f94b6fd62a1109273e6ded38a
+    notifier: c-lf6t6:n-vtsp6
+  condition:
+  - Success
+  - Changed
+  - Failed
